@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    revproxy:
+        image: nginx
+        ports:
+            - 80:80
+        volumes:
+            - ./nginx-site.conf:/etc/nginx/conf.d/default.conf:ro
+
+    auth:
+        build: auth
+        environment:
+            - SECRET_KEY=a2Spt3J^qnlkifzU!FpK&g1^
+
+    upstream:
+        image: nginx
